@@ -12,17 +12,18 @@
   },
   "license": "ISC",
   "author": "Abdulfattoh",
-  "type": "commonjs",
+  "type": "module",
   "main": "src/index.ts",
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "dev": "nodemon src/index.ts"
+    "start": "dotenv -- ts-node src/index.ts",
+    "dev": "dotenv -- nodemon src/index.ts"
   },
   "dependencies": {
     "express": "^5.1.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.5",
+    "dotenv-cli": "^11.0.0",
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2",
     "ts-node": "^10.9.2",
