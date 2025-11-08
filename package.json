@@ -1,0 +1,31 @@
+{
+  "name": "task-tracker-express",
+  "version": "0.0.0",
+  "description": "Task tracker app",
+  "homepage": "https://github.com/AbdulFattoh5/task-tracker-express#readme",
+  "bugs": {
+    "url": "https://github.com/AbdulFattoh5/task-tracker-express/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbdulFattoh5/task-tracker-express.git"
+  },
+  "license": "ISC",
+  "author": "Abdulfattoh",
+  "type": "commonjs",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "dev": "nodemon src/index.ts"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.5",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
