@@ -6,40 +6,67 @@ import type {
   CreateCardRequest,
 } from '../types/cards/index.ts';
 import type { IdParams } from '../types/common/index.ts';
+import { createCard, deleteCard, getManyCards, getOneCard, updateCard } from '../database/cards-repository.ts';
+import { randomUUID } from 'crypto';
 
 export const cardsRouter = express.Router();
 
 cardsRouter.get(
   '/',
-  (request: Request<{}, {}>, response: Response<GetCardsResponse>) => {
-    // TODO: Return cards
+  async (request: Request<{}, {}>, response: Response<GetCardsResponse>) => {
+    const cards = await getManyCards();
+    response.send(cards);
   },
 );
 
 cardsRouter.get(
   '/:id',
-  (request: Request<IdParams, {}>, response: Response<Card>) => {
-    // TODO: Return card
+  async (
+    request: Request<IdParams, Card | string, {}>,
+    response: Response<Card | string>,
+  ) => {
+    const card = await getOneCard(request.params.id);
+
+    if (!card) {
+      return response.status(404).send('Card not found');
+    }
+
+    response.send(card);
   },
 );
 
 cardsRouter.post(
   '/',
-  (request: Request<{}, CreateCardRequest>, response: Response<Card>) => {
-    // TODO: Create card
+  async (request: Request<{}, Card, CreateCardRequest>, response: Response<Card>) => {
+    const card: Card ={
+      text:request.body.text,
+      id: randomUUID()
+    };
+
+    await createCard(card);
+
+    response.send(card);
   },
 );
 
 cardsRouter.put(
   '/:id',
-  (request: Request<IdParams, Card>, response: Response<Card>) => {
-    // TODO: Update card
+  async (request: Request<IdParams, Card, CreateCardRequest>, response: Response<Card>) => {
+    const card = {
+      id:request.params.id,
+      text:request.body.text
+    };
+
+    await updateCard(card);
+
+    return response.send(card);
   },
 );
 
 cardsRouter.delete(
   '/:id',
-  (request: Request<IdParams>, response: Response<void>) => {
-    // TODO: Delete card
+  async (request: Request<IdParams>, response: Response<void>) => {
+    await deleteCard(request.params.id);
+    response.sendStatus(204);
   },
 );

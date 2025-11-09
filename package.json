@@ -19,10 +19,12 @@
     "dev": "dotenv -- nodemon src/index.ts"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@types/express": "^5.0.5",
+    "@types/node": "^24.10.0",
     "dotenv-cli": "^11.0.0",
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2",
